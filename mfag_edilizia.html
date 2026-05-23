@@ -1,0 +1,2348 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>M.F.A.G Edilizia SRL — Milano</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Bebas+Neue&family=Montserrat:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet">
+  <style>
+    /* ─── RESET & BASE ─── */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --red: #C8281E;
+      --red-dark: #9B1E15;
+      --red-glow: rgba(200, 40, 30, 0.15);
+      --black: #080808;
+      --dark: #0F0F0F;
+      --dark2: #151515;
+      --dark3: #1C1C1C;
+      --dark4: #242424;
+      --steel: #2A2A2A;
+      --light: #F0EBE0;
+      --light2: #C8C0B0;
+      --muted: #6B6560;
+      --gold: #B8A070;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-size: 16px;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--light);
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+      cursor: crosshair;
+    }
+
+    ::selection {
+      background: var(--red);
+      color: white;
+    }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar {
+      width: 4px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--black);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--red);
+    }
+
+    /* ─── NOISE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    /* ─── NAV ─── */
+    #nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 500;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(1.5rem, 5vw, 4rem);
+      height: 72px;
+      background: rgba(8, 8, 8, 0.85);
+      backdrop-filter: blur(20px) saturate(180%);
+      border-bottom: 1px solid rgba(200, 40, 30, 0.2);
+      transition: height 0.4s, background 0.4s;
+    }
+
+    #nav.scrolled {
+      height: 60px;
+      background: rgba(8, 8, 8, 0.97);
+    }
+
+    .nav-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-logo-svg {
+      height: 44px;
+      width: auto;
+      transition: height 0.4s;
+    }
+
+    #nav.scrolled .nav-logo-svg {
+      height: 36px;
+    }
+
+    .nav-logo-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1;
+    }
+
+    .nav-logo-text .t1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.45rem;
+      letter-spacing: 0.15em;
+      color: var(--light);
+    }
+
+    .nav-logo-text .t2 {
+      font-size: 0.58rem;
+      letter-spacing: 0.5em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: clamp(1.2rem, 3vw, 2.5rem);
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--light2);
+      text-decoration: none;
+      position: relative;
+      padding-bottom: 4px;
+      transition: color 0.3s;
+    }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: var(--red);
+      transition: width 0.35s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .nav-links a:hover {
+      color: white;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.95rem;
+      letter-spacing: 0.2em;
+      background: var(--red);
+      color: white;
+      border: none;
+      padding: 0.6rem 1.6rem;
+      cursor: crosshair;
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+      transition: background 0.3s, transform 0.2s;
+    }
+
+    .nav-cta:hover {
+      background: var(--red-dark);
+      transform: translateY(-1px);
+    }
+
+    .nav-hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: crosshair;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+
+    .nav-hamburger span {
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--light);
+      transition: all 0.3s;
+    }
+
+    .nav-mobile {
+      display: none;
+      position: fixed;
+      inset: 0;
+      top: 72px;
+      background: rgba(8, 8, 8, 0.98);
+      backdrop-filter: blur(20px);
+      z-index: 499;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+    }
+
+    .nav-mobile.open {
+      display: flex;
+    }
+
+    .nav-mobile a {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      letter-spacing: 0.1em;
+      color: var(--light);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .nav-mobile a:hover {
+      color: var(--red);
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      position: relative;
+      min-height: 100svh;
+      display: grid;
+      grid-template-rows: 1fr auto;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1800&q=80&fit=crop') center/cover no-repeat;
+      transform: scale(1.05);
+      animation: heroZoom 12s ease-out forwards;
+    }
+
+    @keyframes heroZoom {
+      to {
+        transform: scale(1);
+      }
+    }
+
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(8, 8, 8, 0.92) 0%, rgba(8, 8, 8, 0.7) 50%, rgba(8, 8, 8, 0.85) 100%);
+    }
+
+    .hero-grid-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(200, 40, 30, 0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(200, 40, 30, 0.06) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 120px clamp(1.5rem, 8vw, 7rem) 60px;
+      min-height: 100svh;
+    }
+
+    .hero-eyebrow {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 0.65rem;
+      letter-spacing: 0.5em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.3s ease forwards;
+    }
+
+    .hero-eyebrow::before {
+      content: '';
+      width: 50px;
+      height: 1px;
+      background: var(--red);
+      flex-shrink: 0;
+    }
+
+    .hero-h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 13vw, 13rem);
+      line-height: 0.88;
+      letter-spacing: 0.02em;
+      color: var(--light);
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.5s ease forwards;
+    }
+
+    .hero-h1 .line-red {
+      color: var(--red);
+      display: block;
+    }
+
+    .hero-h1 .line-outline {
+      -webkit-text-stroke: 1px rgba(240, 235, 224, 0.3);
+      color: transparent;
+      display: block;
+    }
+
+    .hero-sub {
+      font-size: clamp(0.85rem, 1.5vw, 1rem);
+      line-height: 1.9;
+      color: var(--light2);
+      font-weight: 300;
+      max-width: 520px;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.7s ease forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.9s ease forwards;
+    }
+
+    .btn-red {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      background: var(--red);
+      color: white;
+      border: none;
+      padding: 1rem 2.8rem;
+      cursor: crosshair;
+      clip-path: polygon(0 0, calc(100%-10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100%-10px));
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-red:hover {
+      background: var(--red-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(200, 40, 30, 0.4);
+    }
+
+    .btn-ghost {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      background: transparent;
+      color: var(--light);
+      border: 1px solid rgba(240, 235, 224, 0.25);
+      padding: 1rem 2.8rem;
+      cursor: crosshair;
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--red);
+      color: var(--red);
+      transform: translateY(-3px);
+    }
+
+    .hero-stats {
+      position: relative;
+      z-index: 10;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1px solid rgba(200, 40, 30, 0.2);
+      opacity: 0;
+      animation: fadeUp 0.9s 1.1s ease forwards;
+    }
+
+    .hero-stat {
+      padding: clamp(1.2rem, 3vw, 2rem) clamp(1.5rem, 4vw, 3rem);
+      border-right: 1px solid rgba(200, 40, 30, 0.15);
+      background: rgba(8, 8, 8, 0.7);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-stat:last-child {
+      border-right: none;
+    }
+
+    .stat-n {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 6vw, 4rem);
+      color: var(--red);
+      line-height: 1;
+      display: block;
+    }
+
+    .stat-l {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ─── CRANE ANIMATION SECTION ─── */
+    #crane-section {
+      position: relative;
+      background: var(--dark);
+      overflow: hidden;
+      height: clamp(280px, 40vw, 480px);
+      border-top: 1px solid rgba(200, 40, 30, 0.15);
+      border-bottom: 1px solid rgba(200, 40, 30, 0.15);
+    }
+
+    .crane-bg-text {
+      position: absolute;
+      bottom: -2rem;
+      left: -1rem;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(6rem, 18vw, 18rem);
+      color: rgba(200, 40, 30, 0.04);
+      letter-spacing: 0.05em;
+      pointer-events: none;
+      white-space: nowrap;
+      line-height: 1;
+    }
+
+    /* Red diagonal stripe */
+    .crane-stripe {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 35%;
+      height: 100%;
+      background: linear-gradient(135deg, transparent 0%, rgba(200, 40, 30, 0.03) 100%);
+      clip-path: polygon(40% 0, 100% 0, 100% 100%, 0% 100%);
+    }
+
+    /* CRANE SVG ANIMATION */
+    .crane-scene {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Tower */
+    .crane-tower-base {
+      position: absolute;
+      bottom: 0;
+      left: 20%;
+      width: 18px;
+      height: 75%;
+      background: var(--red-dark);
+    }
+
+    .crane-tower-base::before,
+    .crane-tower-base::after {
+      content: '';
+      position: absolute;
+      left: -22px;
+      right: -22px;
+      height: 2px;
+      background: rgba(200, 40, 30, 0.6);
+    }
+
+    .crane-tower-base::before {
+      top: 15%;
+    }
+
+    .crane-tower-base::after {
+      top: 45%;
+    }
+
+    /* Horizontal jib */
+    .crane-jib {
+      position: absolute;
+      background: var(--red-dark);
+      height: 10px;
+      bottom: 74%;
+      left: calc(20% - 60px);
+      width: clamp(160px, 30vw, 320px);
+      transform-origin: calc(60px + 9px) center;
+    }
+
+    /* Counter-jib */
+    .crane-counter-jib {
+      position: absolute;
+      background: var(--red-dark);
+      height: 8px;
+      bottom: 74%;
+      left: 20%;
+      width: clamp(60px, 10vw, 100px);
+      margin-left: 18px;
+    }
+
+    /* Hook assembly - slides back and forth along jib */
+    .crane-hook-assembly {
+      position: absolute;
+      bottom: calc(74% + 10px);
+      left: calc(20% - 60px);
+      animation: trolley 5s ease-in-out infinite;
+    }
+
+    @keyframes trolley {
+      0% {
+        transform: translateX(20px);
+      }
+
+      40% {
+        transform: translateX(calc(clamp(130px, 24vw, 270px)));
+      }
+
+      60% {
+        transform: translateX(calc(clamp(130px, 24vw, 270px)));
+      }
+
+      100% {
+        transform: translateX(20px);
+      }
+    }
+
+    .crane-rope {
+      width: 2px;
+      background: rgba(240, 235, 224, 0.4);
+      height: clamp(60px, 10vw, 100px);
+      margin: 0 auto;
+      animation: ropeLen 5s ease-in-out infinite;
+    }
+
+    @keyframes ropeLen {
+      0% {
+        height: clamp(60px, 10vw, 100px);
+      }
+
+      40% {
+        height: clamp(80px, 15vw, 150px);
+      }
+
+      60% {
+        height: clamp(80px, 15vw, 150px);
+      }
+
+      100% {
+        height: clamp(60px, 10vw, 100px);
+      }
+    }
+
+    .crane-hook {
+      width: 20px;
+      height: 20px;
+      margin: 0 auto;
+    }
+
+    /* Load box */
+    .crane-load {
+      width: clamp(36px, 5vw, 52px);
+      height: clamp(28px, 4vw, 40px);
+      background: var(--steel);
+      border: 1.5px solid rgba(200, 40, 30, 0.5);
+      margin: 0 auto;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.55rem;
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.1em;
+      color: var(--red);
+    }
+
+    .crane-load::before {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border: 1px solid rgba(200, 40, 30, 0.2);
+    }
+
+    /* Ground / site elements */
+    .crane-ground {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: clamp(30px, 5vw, 50px);
+      background: var(--dark2);
+      border-top: 2px solid var(--steel);
+    }
+
+    /* Building under construction */
+    .crane-building {
+      position: absolute;
+      bottom: clamp(30px, 5vw, 50px);
+      left: 45%;
+    }
+
+    .floor {
+      width: clamp(80px, 15vw, 160px);
+      background: var(--dark3);
+      border: 1.5px solid var(--steel);
+      margin-top: 2px;
+      position: relative;
+      display: flex;
+      gap: 4px;
+      padding: 4px;
+    }
+
+    .floor-win {
+      flex: 1;
+      background: rgba(200, 40, 30, 0.15);
+      border: 1px solid rgba(200, 40, 30, 0.3);
+    }
+
+    .floor:nth-child(1) {
+      height: clamp(18px, 3vw, 28px);
+    }
+
+    .floor:nth-child(2) {
+      height: clamp(18px, 3vw, 28px);
+      animation: buildFloor 1s 2.5s ease both;
+    }
+
+    .floor:nth-child(3) {
+      height: clamp(18px, 3vw, 28px);
+      animation: buildFloor 1s 5.5s ease both;
+    }
+
+    @keyframes buildFloor {
+      from {
+        opacity: 0;
+        transform: scaleY(0);
+        transform-origin: bottom;
+      }
+
+      to {
+        opacity: 1;
+        transform: scaleY(1);
+      }
+    }
+
+    /* Workers silhouettes */
+    .worker {
+      position: absolute;
+      bottom: clamp(30px, 5vw, 50px);
+      width: 6px;
+      background: var(--muted);
+      border-radius: 3px 3px 0 0;
+    }
+
+    .w1 {
+      height: 22px;
+      left: 38%;
+      animation: workerBob 1.8s ease-in-out infinite;
+    }
+
+    .w2 {
+      height: 20px;
+      left: 42%;
+      animation: workerBob 2.1s 0.4s ease-in-out infinite;
+    }
+
+    .w3 {
+      height: 24px;
+      left: 64%;
+      animation: workerBob 1.6s 0.8s ease-in-out infinite;
+    }
+
+    @keyframes workerBob {
+
+      0%,
+      100% {
+        transform: scaleY(1);
+      }
+
+      50% {
+        transform: scaleY(0.9);
+      }
+    }
+
+    /* Dust particles */
+    .dust {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(184, 160, 112, 0.25);
+      animation: dustFloat 4s ease-in-out infinite;
+    }
+
+    .dust:nth-child(1) {
+      width: 6px;
+      height: 6px;
+      left: 45%;
+      bottom: clamp(55px, 8vw, 90px);
+      animation-delay: 0s;
+    }
+
+    .dust:nth-child(2) {
+      width: 4px;
+      height: 4px;
+      left: 47%;
+      bottom: clamp(65px, 9vw, 100px);
+      animation-delay: 1.2s;
+    }
+
+    .dust:nth-child(3) {
+      width: 8px;
+      height: 8px;
+      left: 43%;
+      bottom: clamp(50px, 7vw, 80px);
+      animation-delay: 2.4s;
+    }
+
+    @keyframes dustFloat {
+      0% {
+        opacity: 0;
+        transform: translate(0, 0) scale(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: translate(-10px, -20px) scale(1.5);
+      }
+
+      100% {
+        opacity: 0;
+        transform: translate(-20px, -40px) scale(0.5);
+      }
+    }
+
+    /* Label */
+    .crane-label {
+      position: absolute;
+      top: clamp(1rem, 3vw, 2rem);
+      right: clamp(1rem, 4vw, 3rem);
+      text-align: right;
+    }
+
+    .crane-label-main {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.2rem, 4vw, 2.5rem);
+      color: var(--light);
+      letter-spacing: 0.08em;
+      line-height: 1;
+    }
+
+    .crane-label-sub {
+      font-size: clamp(0.55rem, 1.2vw, 0.7rem);
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    /* ─── SECTION COMMONS ─── */
+    .section-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.65rem;
+      letter-spacing: 0.45em;
+      text-transform: uppercase;
+      color: var(--red);
+      margin-bottom: 1.2rem;
+    }
+
+    .section-pill::before {
+      content: '';
+      width: 30px;
+      height: 1px;
+      background: var(--red);
+    }
+
+    .section-title-xl {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.8rem, 7vw, 6rem);
+      line-height: 0.92;
+      letter-spacing: 0.02em;
+      color: var(--light);
+    }
+
+    .section-title-xl span {
+      color: var(--red);
+    }
+
+    .section-body {
+      font-size: clamp(0.85rem, 1.5vw, 0.95rem);
+      line-height: 1.9;
+      color: var(--light2);
+      font-weight: 300;
+    }
+
+    /* Intersection Observer reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s cubic-bezier(.4, 0, .2, 1), transform 0.8s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: opacity 0.8s cubic-bezier(.4, 0, .2, 1), transform 0.8s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(50px);
+      transition: opacity 0.8s cubic-bezier(.4, 0, .2, 1), transform 0.8s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .reveal-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ─── CHI SIAMO ─── */
+    #about {
+      padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 6vw, 6rem);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 8rem);
+      align-items: center;
+      background: var(--dark);
+    }
+
+    .about-img-wrap {
+      position: relative;
+    }
+
+    .about-img-main {
+      width: 100%;
+      aspect-ratio: 4/5;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(20%) contrast(1.1);
+    }
+
+    .about-img-accent {
+      position: absolute;
+      bottom: -8%;
+      right: -8%;
+      width: 50%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border: 4px solid var(--dark);
+      filter: grayscale(20%);
+    }
+
+    .about-img-badge {
+      position: absolute;
+      top: -5%;
+      left: -5%;
+      width: clamp(80px, 12vw, 130px);
+      height: clamp(80px, 12vw, 130px);
+      background: var(--red);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    }
+
+    .about-img-badge .bn {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      color: white;
+      line-height: 1;
+    }
+
+    .about-img-badge .bl {
+      font-size: 0.5rem;
+      letter-spacing: 0.2em;
+      color: rgba(255, 255, 255, 0.8);
+      text-transform: uppercase;
+    }
+
+    .about-text {}
+
+    .about-quote {
+      border-left: 3px solid var(--red);
+      padding-left: 1.5rem;
+      margin: 2rem 0;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--light2);
+      line-height: 1.7;
+    }
+
+    .about-facts {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      margin-top: 2.5rem;
+      background: var(--steel);
+    }
+
+    .fact {
+      background: var(--dark2);
+      padding: 1.5rem;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.3s, background 0.3s;
+    }
+
+    .fact:hover {
+      border-color: var(--red);
+      background: var(--dark3);
+    }
+
+    .fact-n {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.5rem;
+      color: var(--red);
+      line-height: 1;
+    }
+
+    .fact-l {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* ─── SERVICES ─── */
+    #services {
+      padding: clamp(5rem, 10vw, 9rem) 0;
+      background: var(--dark2);
+    }
+
+    .services-header {
+      padding: 0 clamp(1.5rem, 6vw, 6rem) 4rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .service-card {
+      position: relative;
+      overflow: hidden;
+      aspect-ratio: 3/4;
+      cursor: crosshair;
+    }
+
+    .service-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(60%) brightness(0.4);
+      transition: filter 0.6s, transform 0.6s;
+    }
+
+    .service-card:hover img {
+      filter: grayscale(20%) brightness(0.5);
+      transform: scale(1.08);
+    }
+
+    .service-card-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(8, 8, 8, 0.95) 0%, rgba(8, 8, 8, 0.3) 60%, transparent 100%);
+      transition: background 0.4s;
+    }
+
+    .service-card:hover .service-card-overlay {
+      background: linear-gradient(to top, rgba(200, 40, 30, 0.85) 0%, rgba(8, 8, 8, 0.4) 60%, transparent 100%);
+    }
+
+    .service-card-content {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 2rem;
+    }
+
+    .service-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 4rem;
+      color: rgba(200, 40, 30, 0.25);
+      line-height: 1;
+      transition: color 0.4s;
+    }
+
+    .service-card:hover .service-num {
+      color: rgba(255, 255, 255, 0.15);
+    }
+
+    .service-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+      letter-spacing: 0.05em;
+      color: white;
+      margin-bottom: 0.5rem;
+      line-height: 1.1;
+    }
+
+    .service-desc {
+      font-size: 0.82rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.75);
+      font-weight: 300;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s, opacity 0.4s;
+      opacity: 0;
+    }
+
+    .service-card:hover .service-desc {
+      max-height: 100px;
+      opacity: 1;
+    }
+
+    .service-bar {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--red);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.5s cubic-bezier(.4, 0, .2, 1);
+    }
+
+    .service-card:hover .service-bar {
+      transform: scaleX(1);
+    }
+
+    /* ─── PORTFOLIO / GALLERY ─── */
+    #portfolio {
+      padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 6vw, 6rem);
+      background: var(--black);
+    }
+
+    .portfolio-intro {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: end;
+      margin-bottom: 4rem;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: repeat(2, clamp(180px, 25vw, 320px));
+      gap: 8px;
+    }
+
+    .pg {
+      overflow: hidden;
+      position: relative;
+      cursor: crosshair;
+    }
+
+    .pg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: grayscale(40%) brightness(0.7);
+      transition: filter 0.5s, transform 0.5s;
+    }
+
+    .pg:hover img {
+      filter: grayscale(0%) brightness(0.9);
+      transform: scale(1.05);
+    }
+
+    .pg-1 {
+      grid-column: 1/6;
+      grid-row: 1/2;
+    }
+
+    .pg-2 {
+      grid-column: 6/9;
+      grid-row: 1/2;
+    }
+
+    .pg-3 {
+      grid-column: 9/13;
+      grid-row: 1/3;
+    }
+
+    .pg-4 {
+      grid-column: 1/4;
+      grid-row: 2/3;
+    }
+
+    .pg-5 {
+      grid-column: 4/9;
+      grid-row: 2/3;
+    }
+
+    .pg-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(200, 40, 30, 0);
+      transition: background 0.4s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .pg:hover .pg-overlay {
+      background: rgba(200, 40, 30, 0.2);
+    }
+
+    .pg-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      color: white;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .pg:hover .pg-label {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── WHY US ─── */
+    #why {
+      padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 6vw, 6rem);
+      background: var(--dark);
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--steel);
+      margin-top: 4rem;
+    }
+
+    .why-card {
+      background: var(--dark);
+      padding: 3rem 2rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.4s;
+    }
+
+    .why-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: var(--red);
+      transform: scaleX(0);
+      transition: transform 0.4s;
+    }
+
+    .why-card:hover {
+      background: var(--dark2);
+    }
+
+    .why-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .why-icon {
+      width: 56px;
+      height: 56px;
+      border: 1px solid rgba(200, 40, 30, 0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 2rem;
+      transition: border-color 0.3s, background 0.3s;
+      font-size: 1.5rem;
+    }
+
+    .why-card:hover .why-icon {
+      background: var(--red);
+      border-color: var(--red);
+    }
+
+    .why-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.08em;
+      color: var(--light);
+      margin-bottom: 0.8rem;
+    }
+
+    .why-desc {
+      font-size: 0.82rem;
+      line-height: 1.8;
+      color: var(--muted);
+      font-weight: 300;
+    }
+
+    /* ─── STRIP CTA ─── */
+    #strip {
+      padding: clamp(4rem, 8vw, 7rem) clamp(1.5rem, 6vw, 6rem);
+      background: var(--red);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #strip::before {
+      content: 'COSTRUIAMO';
+      position: absolute;
+      right: -2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(5rem, 15vw, 12rem);
+      color: rgba(0, 0, 0, 0.08);
+      pointer-events: none;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .strip-text {}
+
+    .strip-text h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2rem, 5vw, 4rem);
+      color: white;
+      line-height: 1.1;
+    }
+
+    .strip-text p {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.75);
+      margin-top: 0.5rem;
+      font-weight: 300;
+    }
+
+    .btn-white {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.2em;
+      background: white;
+      color: var(--red);
+      border: none;
+      padding: 1.1rem 3rem;
+      cursor: crosshair;
+      flex-shrink: 0;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+      transition: all 0.3s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-white:hover {
+      background: var(--dark);
+      color: white;
+      transform: translateY(-3px);
+    }
+
+    /* ─── CONTACT ─── */
+    #contact {
+      background: var(--black);
+    }
+
+    .contact-top {
+      padding: clamp(5rem, 10vw, 9rem) clamp(1.5rem, 6vw, 6rem);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(3rem, 6vw, 8rem);
+    }
+
+    .contact-info {}
+
+    .contact-info h2 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      line-height: 0.95;
+      color: var(--light);
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-info h2 span {
+      color: var(--red);
+    }
+
+    .contact-info p {
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: var(--light2);
+      font-weight: 300;
+      margin-bottom: 3rem;
+      max-width: 400px;
+    }
+
+    .c-item {
+      display: flex;
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+      align-items: flex-start;
+    }
+
+    .c-icon {
+      width: 48px;
+      height: 48px;
+      flex-shrink: 0;
+      background: var(--dark3);
+      border: 1px solid rgba(200, 40, 30, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+      transition: background 0.3s;
+    }
+
+    .c-item:hover .c-icon {
+      background: var(--red);
+    }
+
+    .c-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 0.3rem;
+    }
+
+    .c-val {
+      font-size: 0.95rem;
+      color: var(--light);
+    }
+
+    /* Form */
+    .contact-form-wrap {}
+
+    .form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .form-row2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .fg {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .flabel {
+      font-size: 0.62rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .finput {
+      background: var(--dark3);
+      border: 1px solid var(--steel);
+      color: var(--light);
+      padding: 0.9rem 1.1rem;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 300;
+      outline: none;
+      transition: border-color 0.3s, background 0.3s;
+    }
+
+    .finput:focus {
+      border-color: var(--red);
+      background: var(--dark2);
+    }
+
+    .finput::placeholder {
+      color: #3A3A3A;
+    }
+
+    .ftextarea {
+      resize: vertical;
+      min-height: 130px;
+    }
+
+    .fselect {
+      cursor: crosshair;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23C8281E' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+    }
+
+    .fsubmit {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.25em;
+      background: var(--red);
+      color: white;
+      border: none;
+      padding: 1.1rem;
+      cursor: crosshair;
+      transition: all 0.3s;
+      clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    }
+
+    .fsubmit:hover {
+      background: var(--red-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(200, 40, 30, 0.4);
+    }
+
+    /* Map strip */
+    .contact-map-strip {
+      height: clamp(220px, 30vw, 380px);
+      position: relative;
+      overflow: hidden;
+      background: url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1600&q=80&fit=crop&crop=center') center/cover no-repeat;
+      filter: grayscale(60%) brightness(0.5);
+    }
+
+    .contact-map-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to right, rgba(8, 8, 8, 0.9) 0%, rgba(8, 8, 8, 0.2) 50%, rgba(8, 8, 8, 0.8) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      flex-direction: column;
+    }
+
+    .map-address {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(1.2rem, 3vw, 2.5rem);
+      letter-spacing: 0.1em;
+      color: white;
+      text-align: center;
+    }
+
+    .map-address span {
+      color: var(--red);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--dark);
+      border-top: 1px solid var(--steel);
+      padding: clamp(3rem, 6vw, 5rem) clamp(1.5rem, 6vw, 6rem);
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 4rem;
+      margin-bottom: 3rem;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--steel);
+    }
+
+    .footer-logo-wrap {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-logo-svg {
+      height: 52px;
+    }
+
+    .footer-brand {}
+
+    .footer-brand .fb1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: 0.15em;
+      color: var(--light);
+    }
+
+    .footer-brand .fb2 {
+      font-size: 0.6rem;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: block;
+      margin-top: 2px;
+    }
+
+    .footer-desc {
+      font-size: 0.82rem;
+      line-height: 1.8;
+      color: var(--muted);
+      font-weight: 300;
+      max-width: 320px;
+    }
+
+    .footer-col h4 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.2em;
+      color: var(--light);
+      margin-bottom: 1.2rem;
+      border-bottom: 1px solid rgba(200, 40, 30, 0.3);
+      padding-bottom: 0.5rem;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+
+    .footer-col ul li a {
+      font-size: 0.82rem;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.3s;
+      letter-spacing: 0.05em;
+    }
+
+    .footer-col ul li a:hover {
+      color: var(--red);
+    }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-copy {
+      font-size: 0.72rem;
+      color: var(--muted);
+      letter-spacing: 0.1em;
+    }
+
+    .footer-red-line {
+      height: 1px;
+      width: 100%;
+      background: linear-gradient(to right, var(--red), transparent);
+      margin-bottom: 3rem;
+      opacity: 0.5;
+    }
+
+    /* ─── MOBILE RESPONSIVE ─── */
+    @media (max-width: 1024px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .footer-top>*:first-child {
+        grid-column: 1/-1;
+      }
+
+      .portfolio-grid {
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-rows: repeat(3, clamp(140px, 22vw, 220px));
+      }
+
+      .pg-1 {
+        grid-column: 1/4;
+        grid-row: 1/2;
+      }
+
+      .pg-2 {
+        grid-column: 4/7;
+        grid-row: 1/2;
+      }
+
+      .pg-3 {
+        grid-column: 1/4;
+        grid-row: 2/3;
+      }
+
+      .pg-4 {
+        grid-column: 4/7;
+        grid-row: 2/3;
+      }
+
+      .pg-5 {
+        grid-column: 1/7;
+        grid-row: 3/4;
+      }
+    }
+
+    @media (max-width: 768px) {
+
+      .nav-links,
+      .nav-cta {
+        display: none;
+      }
+
+      .nav-hamburger {
+        display: flex;
+      }
+
+      #about,
+      .contact-top,
+      .portfolio-intro {
+        grid-template-columns: 1fr;
+      }
+
+      .about-img-accent {
+        display: none;
+      }
+
+      .about-img-badge {
+        width: 80px;
+        height: 80px;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .service-card {
+        aspect-ratio: 16/9;
+      }
+
+      .service-desc {
+        max-height: 100px;
+        opacity: 1;
+      }
+
+      .why-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .portfolio-grid {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .pg {
+        height: 200px;
+      }
+
+      .pg-3 {
+        grid-column: auto;
+        grid-row: auto;
+      }
+
+      .pg-5 {
+        grid-column: auto;
+        grid-row: auto;
+      }
+
+      .footer-top {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      #strip {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .about-facts {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .form-row2 {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-h1 {
+        font-size: clamp(3.5rem, 18vw, 6rem);
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+
+      .crane-tower-base {
+        left: 12%;
+      }
+
+      .crane-jib {
+        left: calc(12% - 60px);
+      }
+
+      .crane-counter-jib {
+        left: 12%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .why-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-facts {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-stat {
+        border-right: none;
+        border-bottom: 1px solid rgba(200, 40, 30, 0.15);
+      }
+
+      .hero-stat:last-child {
+        border-bottom: none;
+      }
+
+      .portfolio-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+      }
+
+      .pg {
+        height: 180px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ═══════════════ NAVBAR ═══════════════ -->
+  <nav id="nav">
+    <a href="#" class="nav-logo-wrap">
+      <!-- Company Logo SVG recreated from business card -->
+      <svg class="nav-logo-svg" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Crane arc (red) -->
+        <path d="M14 68 Q14 18 52 18" stroke="#C8281E" stroke-width="4.5" fill="none" stroke-linecap="round" />
+        <!-- Crane lattice left -->
+        <line x1="14" y1="68" x2="22" y2="48" stroke="#C8281E" stroke-width="2.5" />
+        <line x1="14" y1="58" x2="22" y2="48" stroke="#C8281E" stroke-width="2" />
+        <line x1="14" y1="48" x2="22" y2="38" stroke="#C8281E" stroke-width="2" />
+        <line x1="14" y1="38" x2="22" y2="28" stroke="#C8281E" stroke-width="2" />
+        <!-- Crane top arc lattice -->
+        <line x1="22" y1="28" x2="32" y2="22" stroke="#C8281E" stroke-width="2" />
+        <line x1="32" y1="22" x2="42" y2="19" stroke="#C8281E" stroke-width="2" />
+        <!-- Jib arm -->
+        <line x1="52" y1="18" x2="66" y2="18" stroke="#C8281E" stroke-width="3" />
+        <!-- Hook cable -->
+        <line x1="64" y1="18" x2="64" y2="34" stroke="#C8281E" stroke-width="2" />
+        <path d="M60 32 Q56 38 60 42 Q65 46 68 40" stroke="#C8281E" stroke-width="2" fill="none"
+          stroke-linecap="round" />
+        <!-- Building (steel/light) -->
+        <rect x="28" y="42" width="24" height="26" stroke="#C8C0B0" stroke-width="2" fill="none" />
+        <rect x="33" y="47" width="5" height="5" stroke="#C8C0B0" stroke-width="1" fill="none" />
+        <rect x="42" y="47" width="5" height="5" stroke="#C8C0B0" stroke-width="1" fill="none" />
+        <rect x="33" y="56" width="5" height="5" stroke="#C8C0B0" stroke-width="1" fill="none" />
+        <rect x="42" y="56" width="5" height="5" stroke="#C8C0B0" stroke-width="1" fill="none" />
+      </svg>
+      <div class="nav-logo-text">
+        <span class="t1">M.F.A.G</span>
+        <span class="t2">Edilizia SRL · Milano</span>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">Chi Siamo</a></li>
+      <li><a href="#services">Servizi</a></li>
+      <li><a href="#portfolio">Progetti</a></li>
+      <li><a href="#why">Perché Noi</a></li>
+      <li><a href="#contact">Contatti</a></li>
+    </ul>
+    <button class="nav-cta"
+      onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Preventivo</button>
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+  <!-- Mobile menu -->
+  <div class="nav-mobile" id="mobileMenu">
+    <a href="#about" onclick="closeMobile()">Chi Siamo</a>
+    <a href="#services" onclick="closeMobile()">Servizi</a>
+    <a href="#portfolio" onclick="closeMobile()">Progetti</a>
+    <a href="#why" onclick="closeMobile()">Perché Noi</a>
+    <a href="#contact" onclick="closeMobile()">Contatti</a>
+  </div>
+
+  <!-- ═══════════════ HERO ═══════════════ -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-eyebrow">Costruiamo il Futuro · Milano, Lombardia</div>
+      <h1 class="hero-h1">
+        <span>EDILIZIA</span>
+        <span class="line-red">D'ECCELLENZA</span>
+        <span class="line-outline">MILANO</span>
+      </h1>
+      <p class="hero-sub">
+        M.F.A.G Edilizia SRL è la tua impresa edile di fiducia a Milano.
+        Costruzioni residenziali, ristrutturazioni complete e manutenzione straordinaria —
+        realizzate con maestria artigianale e materiali di prima qualità.
+      </p>
+      <div class="hero-actions">
+        <a href="#services" class="btn-red">Scopri i Servizi</a>
+        <a href="#contact" class="btn-ghost">Richiedi Preventivo</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat"><span class="stat-n">15+</span>
+        <div class="stat-l">Anni di Esperienza</div>
+      </div>
+      <div class="hero-stat"><span class="stat-n">200+</span>
+        <div class="stat-l">Progetti Completati</div>
+      </div>
+      <div class="hero-stat"><span class="stat-n">100%</span>
+        <div class="stat-l">Qualità Garantita</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ CRANE ANIMATION ═══════════════ -->
+  <section id="crane-section">
+    <div class="crane-bg-text">COSTRUIAMO</div>
+    <div class="crane-stripe"></div>
+    <div class="crane-scene">
+      <!-- Tower -->
+      <div class="crane-tower-base"></div>
+      <!-- Jib -->
+      <div class="crane-jib"></div>
+      <!-- Counter-jib -->
+      <div class="crane-counter-jib"></div>
+      <!-- Trolley + Hook + Load -->
+      <div class="crane-hook-assembly">
+        <div class="crane-rope"></div>
+        <svg class="crane-hook" viewBox="0 0 20 20">
+          <path d="M10 2 L10 10 Q10 18 16 18 Q20 18 20 14" stroke="#C8281E" stroke-width="2" fill="none"
+            stroke-linecap="round" />
+        </svg>
+        <div class="crane-load">MFAG</div>
+      </div>
+      <!-- Building under construction -->
+      <div class="crane-building">
+        <div class="floor">
+          <div class="floor-win"></div>
+          <div class="floor-win"></div>
+          <div class="floor-win"></div>
+        </div>
+        <div class="floor">
+          <div class="floor-win"></div>
+          <div class="floor-win"></div>
+          <div class="floor-win"></div>
+        </div>
+        <div class="floor">
+          <div class="floor-win"></div>
+          <div class="floor-win"></div>
+          <div class="floor-win"></div>
+        </div>
+      </div>
+      <!-- Workers -->
+      <div class="worker w1"></div>
+      <div class="worker w2"></div>
+      <div class="worker w3"></div>
+      <!-- Dust particles -->
+      <div class="dust"></div>
+      <div class="dust"></div>
+      <div class="dust"></div>
+      <!-- Ground -->
+      <div class="crane-ground"></div>
+    </div>
+    <div class="crane-label">
+      <div class="crane-label-main">CANTIERE ATTIVO</div>
+      <div class="crane-label-sub">Ogni giorno costruiamo il tuo domani</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ CHI SIAMO ═══════════════ -->
+  <section id="about">
+    <div class="about-img-wrap reveal-left">
+      <img class="about-img-main" src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=900&q=80&fit=crop"
+        alt="Cantiere M.F.A.G Milano" loading="lazy">
+      <img class="about-img-accent"
+        src="https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?w=500&q=80&fit=crop" alt="Operai edili"
+        loading="lazy">
+      <div class="about-img-badge">
+        <span class="bn">SRL</span>
+        <span class="bl">Certificata</span>
+      </div>
+    </div>
+    <div class="about-text reveal-right">
+      <div class="section-pill">Chi Siamo</div>
+      <h2 class="section-title-xl">COSTRUIAMO<br>CON <span>PASSIONE</span></h2>
+      <blockquote class="about-quote">
+        "Ogni edificio che realizziamo è il frutto di competenza, dedizione e rispetto per chi ci affida il proprio
+        progetto di vita."
+      </blockquote>
+      <p class="section-body">
+        M.F.A.G Edilizia SRL è un'impresa edile con sede in Via Santi Nabore e Felice 3, nel cuore di Milano.
+        Da oltre 15 anni operiamo nel settore delle costruzioni residenziali e commerciali,
+        mettendo al centro del nostro lavoro la qualità dei materiali, la cura del dettaglio e il rispetto delle
+        scadenze.
+      </p>
+      <div class="about-facts">
+        <div class="fact">
+          <div class="fact-n">15+</div>
+          <div class="fact-l">Anni Attivi</div>
+        </div>
+        <div class="fact">
+          <div class="fact-n">200+</div>
+          <div class="fact-l">Cantieri</div>
+        </div>
+        <div class="fact">
+          <div class="fact-n">50+</div>
+          <div class="fact-l">Professionisti</div>
+        </div>
+        <div class="fact">
+          <div class="fact-n">MI</div>
+          <div class="fact-l">Basati a Milano</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ SERVICES ═══════════════ -->
+  <section id="services">
+    <div class="services-header reveal">
+      <div class="section-pill">Servizi</div>
+      <h2 class="section-title-xl">COSA <span>FACCIAMO</span></h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=700&q=80&fit=crop"
+          alt="Nuove costruzioni" loading="lazy">
+        <div class="service-card-overlay"></div>
+        <div class="service-card-content">
+          <div class="service-num">01</div>
+          <div class="service-title">NUOVE<br>COSTRUZIONI</div>
+          <div class="service-desc">Realizziamo edifici residenziali e commerciali chiavi in mano, dalla progettazione
+            alla consegna, con materiali certificati e maestranze qualificate.</div>
+        </div>
+        <div class="service-bar"></div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80&fit=crop" alt="Ristrutturazioni"
+          loading="lazy">
+        <div class="service-card-overlay"></div>
+        <div class="service-card-content">
+          <div class="service-num">02</div>
+          <div class="service-title">RISTRUTTURAZIONI<br>COMPLETE</div>
+          <div class="service-desc">Trasformiamo gli spazi esistenti rispettando il valore architettonico degli immobili
+            milanesi, con interventi mirati e risultati impeccabili.</div>
+        </div>
+        <div class="service-bar"></div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=700&q=80&fit=crop" alt="Manutenzione"
+          loading="lazy">
+        <div class="service-card-overlay"></div>
+        <div class="service-card-content">
+          <div class="service-num">03</div>
+          <div class="service-title">MANUTENZIONE<br>STRAORDINARIA</div>
+          <div class="service-desc">Interventi programmati e urgenti per preservare il valore del vostro immobile nel
+            tempo. Rapidi, affidabili, professionali.</div>
+        </div>
+        <div class="service-bar"></div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?w=700&q=80&fit=crop"
+          alt="Opere strutturali" loading="lazy">
+        <div class="service-card-overlay"></div>
+        <div class="service-card-content">
+          <div class="service-num">04</div>
+          <div class="service-title">OPERE<br>STRUTTURALI</div>
+          <div class="service-desc">Fondazioni, consolidamenti e interventi antisismici. Sicurezza strutturale garantita
+            da ingegneri e tecnici specializzati.</div>
+        </div>
+        <div class="service-bar"></div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=700&q=80&fit=crop"
+          alt="Interior & finiture" loading="lazy">
+        <div class="service-card-overlay"></div>
+        <div class="service-card-content">
+          <div class="service-num">05</div>
+          <div class="service-title">FINITURE<br>& INTERIOR</div>
+          <div class="service-desc">Pavimentazioni, rivestimenti, impianti elettrici e idraulici. Ogni dettaglio curato
+            con precisione artigianale italiana.</div>
+        </div>
+        <div class="service-bar"></div>
+      </div>
+      <div class="service-card">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=700&q=80&fit=crop"
+          alt="Project management" loading="lazy">
+        <div class="service-card-overlay"></div>
+        <div class="service-card-content">
+          <div class="service-num">06</div>
+          <div class="service-title">PROJECT<br>MANAGEMENT</div>
+          <div class="service-desc">Coordinamento completo di progettisti, fornitori e squadre operative per garantire
+            il successo di ogni cantiere nei tempi e nei costi previsti.</div>
+        </div>
+        <div class="service-bar"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ PORTFOLIO ═══════════════ -->
+  <section id="portfolio">
+    <div class="portfolio-intro">
+      <div class="reveal-left">
+        <div class="section-pill">I Nostri Lavori</div>
+        <h2 class="section-title-xl">PROGETTI<br><span>REALIZZATI</span></h2>
+      </div>
+      <div class="reveal-right">
+        <p class="section-body" style="margin-bottom:2rem;">Ogni cantiere racconta una storia di impegno, precisione e
+          passione. Sfoglia alcuni dei nostri lavori più significativi sul territorio milanese e lombardo.</p>
+        <a href="#contact" class="btn-red">Vedi Tutti i Progetti</a>
+      </div>
+    </div>
+    <div class="portfolio-grid reveal">
+      <div class="pg pg-1">
+        <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80&fit=crop"
+          alt="Edificio residenziale Milano" loading="lazy">
+        <div class="pg-overlay"><span class="pg-label">RESIDENZIALE · 2023</span></div>
+      </div>
+      <div class="pg pg-2">
+        <img src="https://images.unsplash.com/photo-1565008447742-97f6f38c985c?w=600&q=80&fit=crop"
+          alt="Ristrutturazione appartamento" loading="lazy">
+        <div class="pg-overlay"><span class="pg-label">RISTRUTTURAZIONE · 2023</span></div>
+      </div>
+      <div class="pg pg-3">
+        <img src="https://images.unsplash.com/photo-1577495508048-b635879837f1?w=600&q=80&fit=crop&crop=center"
+          alt="Cantiere edile" loading="lazy">
+        <div class="pg-overlay"><span class="pg-label">COMMERCIALE · 2022</span></div>
+      </div>
+      <div class="pg pg-4">
+        <img src="https://images.unsplash.com/photo-1524758631624-e2822e304c36?w=500&q=80&fit=crop"
+          alt="Interior finiture" loading="lazy">
+        <div class="pg-overlay"><span class="pg-label">FINITURE · 2024</span></div>
+      </div>
+      <div class="pg pg-5">
+        <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&q=80&fit=crop"
+          alt="Nuova costruzione" loading="lazy">
+        <div class="pg-overlay"><span class="pg-label">NUOVO SVILUPPO · 2024</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ PERCHÉ NOI ═══════════════ -->
+  <section id="why">
+    <div style="text-align:center;" class="reveal">
+      <div class="section-pill" style="justify-content:center;">I Nostri Valori</div>
+      <h2 class="section-title-xl">PERCHÉ SCEGLIERE <span>MFAG</span></h2>
+    </div>
+    <div class="why-grid reveal">
+      <div class="why-card">
+        <div class="why-icon">🏗️</div>
+        <div class="why-title">ESPERIENZA PROVATA</div>
+        <div class="why-desc">Oltre 15 anni di cantieri completati a Milano e in tutta la Lombardia. Conosciamo il
+          territorio, le normative e le specificità costruttive locali.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">✅</div>
+        <div class="why-title">QUALITÀ CERTIFICATA</div>
+        <div class="why-desc">Utilizziamo esclusivamente materiali certificati e maestranze qualificate. Ogni lavoro è
+          seguito da un direttore di cantiere dedicato.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">⏱️</div>
+        <div class="why-title">PUNTUALITÀ & RISPETTO</div>
+        <div class="why-desc">Rispettiamo tempi e budget concordati. Aggiornamenti costanti al cliente e piena
+          trasparenza in ogni fase del cantiere.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">🤝</div>
+        <div class="why-title">ASSISTENZA TOTALE</div>
+        <div class="why-desc">Ti seguiamo dal progetto iniziale fino al collaudo finale. Disponibili per qualsiasi
+          necessità, anche dopo la consegna dei lavori.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ CTA STRIP ═══════════════ -->
+  <div id="strip">
+    <div class="strip-text reveal-left">
+      <h2>HAI UN PROGETTO IN MENTE?<br>PARLIAMONE.</h2>
+      <p>Preventivo gratuito e senza impegno. Rispondiamo entro 24 ore.</p>
+    </div>
+    <a href="#contact" class="btn-white reveal-right">Contattaci Ora →</a>
+  </div>
+
+  <!-- ═══════════════ CONTATTI ═══════════════ -->
+  <section id="contact">
+    <div class="contact-top">
+      <div class="contact-info reveal-left">
+        <h2><span>CONTATTA</span><br>M.F.A.G</h2>
+        <p>Siamo a vostra disposizione per preventivi, consulenze e qualsiasi informazione sui nostri servizi. Risposta
+          garantita entro 24 ore lavorative.</p>
+        <div class="c-item">
+          <div class="c-icon">📞</div>
+          <div>
+            <div class="c-label">Telefono</div>
+            <div class="c-val">+39 331 201 7904</div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">✉</div>
+          <div>
+            <div class="c-label">Email PEC</div>
+            <div class="c-val">mfagedile26@pec.it</div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">🌐</div>
+          <div>
+            <div class="c-label">Sito Web</div>
+            <div class="c-val">www.mfag-edilizia.com</div>
+          </div>
+        </div>
+        <div class="c-item">
+          <div class="c-icon">📍</div>
+          <div>
+            <div class="c-label">Sede Operativa</div>
+            <div class="c-val">Via Santi Nabore e Felice 3, 20147 Milano MI</div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form-wrap reveal-right">
+        <div class="form">
+          <div class="form-row2">
+            <div class="fg">
+              <label class="flabel">Nome e Cognome</label>
+              <input type="text" class="finput" placeholder="Mario Rossi">
+            </div>
+            <div class="fg">
+              <label class="flabel">Telefono</label>
+              <input type="tel" class="finput" placeholder="+39 333 ...">
+            </div>
+          </div>
+          <div class="fg">
+            <label class="flabel">Email</label>
+            <input type="email" class="finput" placeholder="mario.rossi@email.it">
+          </div>
+          <div class="fg">
+            <label class="flabel">Tipo di Intervento</label>
+            <select class="finput fselect">
+              <option value="">Seleziona servizio...</option>
+              <option>Nuova Costruzione</option>
+              <option>Ristrutturazione Completa</option>
+              <option>Manutenzione Straordinaria</option>
+              <option>Opere Strutturali</option>
+              <option>Finiture & Interior</option>
+              <option>Altro</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label class="flabel">Descrivi il tuo Progetto</label>
+            <textarea class="finput ftextarea"
+              placeholder="Descrivimi il tuo progetto, la metratura, le tempistiche desiderate..."></textarea>
+          </div>
+          <button class="fsubmit">Invia Richiesta di Preventivo →</button>
+        </div>
+      </div>
+    </div>
+    <div class="contact-map-strip">
+      <div class="contact-map-overlay">
+        <div class="map-address">MILANO · <span>VIA SANTI NABORE E FELICE 3</span> · CAP 20147</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <footer>
+    <div class="footer-red-line"></div>
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo-wrap">
+          <svg class="footer-logo-svg" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 68 Q14 18 52 18" stroke="#C8281E" stroke-width="4.5" fill="none" stroke-linecap="round" />
+            <line x1="14" y1="68" x2="22" y2="48" stroke="#C8281E" stroke-width="2.5" />
+            <line x1="14" y1="58" x2="22" y2="48" stroke="#C8281E" stroke-width="2" />
+            <line x1="14" y1="48" x2="22" y2="38" stroke="#C8281E" stroke-width="2" />
+            <line x1="14" y1="38" x2="22" y2="28" stroke="#C8281E" stroke-width="2" />
+            <line x1="22" y1="28" x2="32" y2="22" stroke="#C8281E" stroke-width="2" />
+            <line x1="32" y1="22" x2="42" y2="19" stroke="#C8281E" stroke-width="2" />
+            <line x1="52" y1="18" x2="66" y2="18" stroke="#C8281E" stroke-width="3" />
+            <line x1="64" y1="18" x2="64" y2="34" stroke="#C8281E" stroke-width="2" />
+            <path d="M60 32 Q56 38 60 42 Q65 46 68 40" stroke="#C8281E" stroke-width="2" fill="none"
+              stroke-linecap="round" />
+            <rect x="28" y="42" width="24" height="26" stroke="#C8C0B0" stroke-width="2" fill="none" />
+            <rect x="33" y="47" width="5" height="5" stroke="#C8C0B0" stroke-width="1" fill="none" />
+            <rect x="42" y="47" width="5" height="5" stroke="#C8C0B0" stroke-width="1" fill="none" />
+            <rect x="33" y="56" width="5" height="5" stroke="#C8C0B0" stroke-width="1" fill="none" />
+            <rect x="42" y="56" width="5" height="5" stroke="#C8C0B0" stroke-width="1" fill="none" />
+          </svg>
+          <div class="footer-brand">
+            <div class="fb1">M.F.A.G Edilizia SRL</div>
+            <span class="fb2">Costruiamo il Tuo Futuro · Milano</span>
+          </div>
+        </div>
+        <p class="footer-desc">Impresa edile certificata con sede a Milano. Specializzata in costruzioni residenziali,
+          ristrutturazioni e manutenzione dal 2009. P.IVA verificata, PEC attiva.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Servizi</h4>
+        <ul>
+          <li><a href="#services">Nuove Costruzioni</a></li>
+          <li><a href="#services">Ristrutturazioni</a></li>
+          <li><a href="#services">Manutenzione</a></li>
+          <li><a href="#services">Opere Strutturali</a></li>
+          <li><a href="#services">Finiture & Interior</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contatti</h4>
+        <ul>
+          <li><a href="tel:+393312017904">+39 331 201 7904</a></li>
+          <li><a href="mailto:mfagedile26@pec.it">mfagedile26@pec.it</a></li>
+          <li><a href="#">www.mfag-edilizia.com</a></li>
+          <li><a href="#">Via S. Nabore e Felice 3</a></li>
+          <li><a href="#">20147 Milano MI</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2024 M.F.A.G Edilizia SRL — P.IVA · Tutti i diritti riservati · Milano</p>
+      <p class="footer-copy"><a href="#" style="color:var(--muted);text-decoration:none;">Privacy Policy</a> · <a
+          href="#" style="color:var(--muted);text-decoration:none;">Cookie Policy</a></p>
+    </div>
+  </footer>
+
+  <!-- ═══════════════ SCRIPTS ═══════════════ -->
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 80);
+    });
+
+    // Hamburger
+    const hamburger = document.getElementById('hamburger');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger.addEventListener('click', () => {
+      mobileMenu.classList.toggle('open');
+      const spans = hamburger.querySelectorAll('span');
+      if (mobileMenu.classList.contains('open')) {
+        spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+        spans[1].style.opacity = '0';
+        spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+      } else {
+        spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+      }
+    });
+    function closeMobile() {
+      mobileMenu.classList.remove('open');
+      const spans = hamburger.querySelectorAll('span');
+      spans.forEach(s => { s.style.transform = ''; s.style.opacity = ''; });
+    }
+
+    // Intersection Observer for reveal animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
+
+    // Stagger children
+    document.querySelectorAll('.why-grid, .about-facts, .services-grid').forEach(parent => {
+      [...parent.children].forEach((child, i) => {
+        child.style.transitionDelay = (i * 0.1) + 's';
+      });
+    });
+  </script>
+</body>
+
+</html>
